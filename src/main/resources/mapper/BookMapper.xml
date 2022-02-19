@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lightnovelbackend.dao.BookMapper">
+    <insert id="addBook" parameterType="Book">
+        insert into
+            book
+        values
+            (null,#{cover},#{title},#{author},#{date},#{press},#{abs},#{category.id})
+    </insert>
+    <update id="updateBook" parameterType="Book">
+        update
+            book
+        set
+            cover=#{cover},title=#{title},author=#{author},date=#{date},press=#{press},abs=#{abs},cid=#{category.id}
+        where
+            id=#{id}
+    </update>
+    <delete id="deleteBook" parameterType="int">
+        delete from book where id=#{id}
+    </delete>
+    <select id="getBook" parameterType="int" resultType="Book">
+        select
+            *
+        from
+            book
+        where
+            id=#{id}
+    </select>
+    <select id="getAllBooks" resultType="Book">
+        select
+            *
+        from
+            book
+    </select>
+    <select id="getBookByCategory" resultType="Book" parameterType="Category">
+        select
+            *
+        from
+            book
+        where
+            category_id=#{id}
+    </select>
+    <select id="getBookByNameOrAuthor" resultType="Book">
+        select
+            *
+        from
+            book
+        where
+            name like '%#{key1}%'
+        or
+            author like '%#{key2}%'
+    </select>
+</mapper>
